@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+     import { create, parseCreationOptionsFromJSON, get, parseRequestOptionsFromJSON } from './webauthn-json.browser-ponyfill.js'
+     window.create = create;
+     window.parseCreationOptionsFromJSON = parseCreationOptionsFromJSON;
+     window.get = get;
+     window.parseRequestOptionsFromJSON = parseRequestOptionsFromJSON;
+    </script>
+    <script src="index.js"></script>
+</head>
+<body>
+
+<div class="container mx-auto">
+    <h1 class="text-4xl pt-10 pb-10">Webauthn Demo</h1>
+
+    <div class="flex flex-wrap">
+        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-2">
+            <div class="border shadow-lg rounded-lg px-7 py-10">
+
+                <h1 class="text-3xl pb-7">Client-side, local key</h1>
+
+                <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick="enroll()">
+                    Enroll
+                </button>
+                <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick="login()">
+                    Login
+                </button>
+            </div>
+        </div>
+        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-2">
+            <div class="border shadow-lg rounded-lg px-7 py-10">
+                <h1 class="text-3xl pb-7">Server, platform key</h1>
+
+                <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick="enrollServer('platform')">
+                    Enroll
+                </button>
+                <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick="loginServer()">
+                    Login
+                </button>
+            </div>
+        </div>
+
+        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-2">
+            <div class="border shadow-lg rounded-lg px-7 py-10">
+                <h1 class="text-3xl pb-7">Server, cross-platform key</h1>
+
+                <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick="enrollServer('cross-platform')">
+                    Enroll
+                </button>
+                <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick="loginServer()">
+                    Login
+                </button>
+            </div>
+        </div>
+    </div>
+
+  <h1 class="text-2xl pt-10 pb-10">Status: <span id="message">waiting, please click any button</span></h1>
+  <pre id="explanation"></pre>
+</div>
+
+</body>
+</html>
